@@ -1,16 +1,16 @@
-import json
-import os
-import random
-import sys
+from json import load
+from random import randint, shuffle
+from sys import argv
+from os.path import exists, isfile
 
 
 def file_exists(filepath):
-    return os.path.exists(filepath) and os.path.isfile(filepath)
+    return exists(filepath) and isfile(filepath)
 
 
 def open_file(file_name):
     with open(file_name, 'r') as filepath:
-        return json.load(filepath)
+        return load(filepath)
 
 
 def count_teams(teams_list):
@@ -24,8 +24,8 @@ def playing_games(teams_list):
     list_games = []
     for k in range(int(len(teams_list)/2)):
         game = {}
-        goal_team_1 = random.randint(0, 9)
-        goal_team_2 = random.randint(0, 9)
+        goal_team_1 = randint(0, 9)
+        goal_team_2 = randint(0, 9)
         if goal_team_1 == goal_team_2:
             goal_team_1 += 1
         game['team_1'] = [teams_list[i], goal_team_1]
@@ -48,10 +48,10 @@ def create_teams_list(list_games):
 
 
 def input_team_name():
-    if len(sys.argv) == 1:
+    if len(argv) == 1:
         team_name = input("Введите название команды: ")
     else:
-        team_name = sys.argv[1]
+        team_name = argv[1]
     return team_name.upper()
 
 
@@ -86,7 +86,7 @@ if __name__ == '__main__':
     else:
         teams_list = open_file(file_name)
         count_teams(teams_list)
-        random.shuffle(teams_list)
+        shuffle(teams_list)
 
         team_name = None
         while teams_list.count(team_name) == 0:
