@@ -63,18 +63,23 @@ def output_info(team_name, results):
         flag = 0
         for result in results[stage]:
             if results[stage][game]['team_2'][0] == team_name:
-                print(team_name + "-" + results[stage][game]['team_1'][0])
-                print(str(results[stage][game]['team_2'][1]) + ":" +
-                      str(results[stage][game]['team_1'][1]))
+                game_this_team = [results[stage][game]['team_2'][0],
+                                  results[stage][game]['team_1'][0],
+                                  results[stage][game]['team_2'][1],
+                                  results[stage][game]['team_1'][1]]
                 flag += 1
             elif results[stage][game]['team_1'][0] == team_name:
-                print(team_name + "-" + results[stage][game]['team_2'][0])
-                print(str(results[stage][game]['team_1'][1]) + ":" +
-                      str(results[stage][game]['team_2'][1]))
+                game_this_team = [results[stage][game]['team_1'][0],
+                                  results[stage][game]['team_2'][0],
+                                  results[stage][game]['team_1'][1],
+                                  results[stage][game]['team_2'][1]]
                 flag += 1
             game += 1
         if flag == 0:
             print("Команда выбыла")
+        else:
+            print(str(game_this_team[0]) + "-" + str(game_this_team[1]))
+            print(str(game_this_team[2]) + ":" + str(game_this_team[3]))
         stage = int(stage/2)
 
 
